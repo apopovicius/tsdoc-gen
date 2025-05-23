@@ -18,26 +18,6 @@ No additional dependencies. Requires VS Code and TypeScript syntax support.
 
 This extension contributes the following settings:
 
-| Setting | Description # TSDoc Gen
-
-Generate TSDoc-style comments for your TypeScript code using smart AST-based analysis.  
-Supports functions, arrow functions, classes, methods, and properties — with configurable output formatting.
-
-## Features
-
-- Generate `/** ... */` TSDoc blocks for functions, classes, and more
-- Works with both manual commands and inline `/*!` triggers
-- AST-powered — not regex or heuristics
-- Configurable: return suppression, empty param blocks, trigger keyword
-
-## Requirements
-
-No additional dependencies. Requires VS Code and TypeScript syntax support.
-
-## Extension Settings
-
-This extension contributes the following settings:
-
 | Setting                           | Description                                                              |
 | --------------------------------- | ------------------------------------------------------------------------ |
 | `tsdocGen.triggerKeyword`         | Custom trigger comment for auto-generation                               |
@@ -135,5 +115,3 @@ vsce package
 ## License
 
 MIT © 2025 Andrei Popovici
-
-Enjoy!
