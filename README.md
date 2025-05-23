@@ -1,5 +1,7 @@
 # TSDoc Gen
 
+[![CI](https://github.com/apopovicius/tsdoc-gen/actions/workflows/ci.yml/badge.svg)](https://github.com/apopovicius/tsdoc-gen/actions/workflows/ci.yml)
+
 Generate TSDoc-style comments for your TypeScript code using smart AST-based analysis.  
 Supports functions, arrow functions, classes, methods, and properties — with configurable output formatting.
 
