@@ -1,4 +1,4 @@
-import { Node, Project } from "ts-morph";
+import { Node, SyntaxKind, Project } from "ts-morph";
 import {
   ArrowFunctionHandler,
   ClassHandler,
@@ -48,5 +48,7 @@ export function generateTSDoc(codeLine: string): string {
   }
 
   // Fallback — should be unreachable if fallback handler is in the array
-  return new FallbackHandler().generate();
+  return new FallbackHandler().generate({
+    getKind: () => SyntaxKind.Unknown,
+  } as unknown as Node);
 }

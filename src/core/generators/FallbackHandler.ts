@@ -7,7 +7,7 @@ export class FallbackHandler implements TSDocHandler {
     return true; // fallback catches all
   }
 
-  generate(): string {
+  generate(p0: any): string {
     return tsdocTemplates.fallback();
   }
 }
