@@ -1,15 +1,15 @@
-<table border="0">
-  <tr>
-    <td width="128" valign="top">
-      <img src="./tsdoc-logo.png" width="128" alt="TSDoc Gen logo" />
-    </td>
-    <td valign="top">
-      <p><font size="5"<strong><b>TSDoc Gen</b></strong></font></p>
-      <p>Create consistent TSDoc comments from your TypeScript source using precise AST parsing. Includes support for functions, classes, methods, and more—with configurable templates. 
-      </p>
-    </td>
-  </tr>
-</table>
+<div align="left" style="display: flex; align-items: center; gap: 1em;">
+  <img src="./tsdoc-logo.png" width="128" alt="TSDoc Gen logo" />
+
+  <div>
+    <p style="margin: 0;"><font size="6"><b><strong>TSDoc Gen</strong></b></font></p>
+    <p style="margin: 0;">
+      Create consistent TSDoc comments from your TypeScript source using precise AST parsing. Includes support for functions, classes, methods, and more—with configurable templates.
+    </p>
+  </div>
+</div>
+
+<br/>
 
 [![CI](https://github.com/apopovicius/tsdoc-gen/actions/workflows/ci.yml/badge.svg)](https://github.com/apopovicius/tsdoc-gen/actions/workflows/ci.yml)
 
