@@ -1,9 +1,17 @@
-# TSDoc Gen
+<table border="0">
+  <tr>
+    <td width="128" valign="top">
+      <img src="./tsdoc-logo.png" width="128" alt="TSDoc Gen logo" />
+    </td>
+    <td valign="top">
+      <p><font size="5"<strong><b>TSDoc Gen</b></strong></font></p>
+      <p>Create consistent TSDoc comments from your TypeScript source using precise AST parsing. Includes support for functions, classes, methods, and more—with configurable templates. 
+      </p>
+    </td>
+  </tr>
+</table>
 
 [![CI](https://github.com/apopovicius/tsdoc-gen/actions/workflows/ci.yml/badge.svg)](https://github.com/apopovicius/tsdoc-gen/actions/workflows/ci.yml)
-
-Generate TSDoc-style comments for your TypeScript code using smart AST-based analysis.  
-Supports functions, arrow functions, classes, methods, and properties — with configurable output formatting.
 
 ## Features
 
