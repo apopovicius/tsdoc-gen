@@ -1,5 +1,5 @@
 <div align="left" style="display: flex; align-items: center; gap: 1em;">
-  <img src="./tsdoc-logo.png" width="128" alt="TSDoc Gen logo" />
+  <img src="./media/tsdoc-logo-full.png" width="128" alt="TSDoc Gen logo" />
 
   <div>
     <p style="margin: 0;"><font size="6"><b><strong>TSDoc Gen</strong></b></font></p>

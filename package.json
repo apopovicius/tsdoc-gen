@@ -4,7 +4,7 @@
   "description": "Generate TSDoc comments for TypeScript code",
   "version": "0.1.2",
   "publisher": "vicius",
-  "icon": "./tsdoc-logo.png",
+  "icon": "./media/tsdoc-logo.webp",
   "engines": {
     "vscode": "^1.100.0"
   },

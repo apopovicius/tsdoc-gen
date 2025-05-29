@@ -12,3 +12,10 @@ vsc-extension-quickstart.md
 **/*.map
 **/*.ts
 **/.vscode-test.*
+**/*.md
+
+# Exclude all PNGs
+**/*.png
+
+# Re-include optimized icon
+!media/tsdoc-logo.webp
