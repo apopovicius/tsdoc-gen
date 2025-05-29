@@ -4,3 +4,4 @@ export * from "./fallback-handler";
 export * from "./function-handler";
 export * from "./method-handler";
 export * from "./property-handler";
+export * from "./tsdoc-handler";
