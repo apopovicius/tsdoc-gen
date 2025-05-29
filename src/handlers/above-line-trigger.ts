@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { generateTSDoc } from "../core/tsdoc-engine";
+import { generateTSDoc } from "../core/";
 
 export function registerAboveLineDocTrigger(): vscode.Disposable {
   return vscode.workspace.onDidChangeTextDocument((event) => {

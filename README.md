@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<br/>
+---
 
 [![CI](https://github.com/apopovicius/tsdoc-gen/actions/workflows/ci.yml/badge.svg)](https://github.com/apopovicius/tsdoc-gen/actions/workflows/ci.yml)
 

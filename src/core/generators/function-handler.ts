@@ -1,5 +1,5 @@
 import { Node, SyntaxKind } from "ts-morph";
-import { TSDocHandler } from "./TSDocHandler";
+import { TSDocHandler } from "./tsdoc-handler";
 import { tsdocTemplates } from "../templates";
 import { extractParamMetadata } from "../formatters/param-metadata";
 

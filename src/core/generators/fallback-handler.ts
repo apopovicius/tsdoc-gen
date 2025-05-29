@@ -1,5 +1,5 @@
 import { Node } from "ts-morph";
-import { TSDocHandler } from "./TSDocHandler";
+import { TSDocHandler } from "./tsdoc-handler";
 import { tsdocTemplates } from "../templates";
 
 export class FallbackHandler implements TSDocHandler {

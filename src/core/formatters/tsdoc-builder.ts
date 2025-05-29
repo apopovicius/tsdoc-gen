@@ -21,7 +21,7 @@ export class TSDocBuilder {
     return this;
   }
 
-  addParams(params: string[][], includeEmpty: boolean): this {
+  addParams(params: string[][], includeEmpty?: boolean): this {
     if (params.length === 0 && !includeEmpty) {
       return this;
     }

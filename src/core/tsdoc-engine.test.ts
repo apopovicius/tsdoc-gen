@@ -1,4 +1,4 @@
-import { generateTSDoc } from "../../core/tsdoc-engine";
+import { generateTSDoc } from "./tsdoc-engine";
 import { expect, it, describe } from "vitest";
 
 describe("generateTSDoc (integration)", () => {

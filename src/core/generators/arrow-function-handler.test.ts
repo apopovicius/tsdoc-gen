@@ -1,5 +1,5 @@
 import { Project } from "ts-morph";
-import { ArrowFunctionHandler } from "../../core/generators";
+import { ArrowFunctionHandler } from ".";
 
 import { expect, it, describe } from "vitest";
 

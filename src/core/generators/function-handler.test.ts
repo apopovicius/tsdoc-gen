@@ -1,6 +1,6 @@
 import { Project } from "ts-morph";
 import { expect, it, describe } from "vitest";
-import { FunctionHandler } from "../../core/generators";
+import { FunctionHandler } from ".";
 
 describe("FunctionHandler", () => {
   const handler = new FunctionHandler();

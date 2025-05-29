@@ -1,6 +1,6 @@
 import { Project } from "ts-morph";
 import { expect, it, describe } from "vitest";
-import { MethodHandler } from "../../core/generators";
+import { MethodHandler } from ".";
 
 describe("MethodHandler", () => {
   const handler = new MethodHandler();

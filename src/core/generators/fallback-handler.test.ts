@@ -1,4 +1,4 @@
-import { FallbackHandler } from "../../core/generators";
+import { FallbackHandler } from ".";
 import { expect, it, describe } from "vitest";
 
 describe("FallbackHandler", () => {

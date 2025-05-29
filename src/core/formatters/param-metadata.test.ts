@@ -1,6 +1,6 @@
 import { expect, it, describe } from "vitest";
 import { Project } from "ts-morph";
-import { extractParamMetadata } from "../../core/formatters/param-metadata";
+import { extractParamMetadata } from "./param-metadata";
 
 describe("extractParamMetadata", () => {
   it("should extract parameter names and types", () => {

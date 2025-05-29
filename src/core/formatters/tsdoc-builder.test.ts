@@ -1,5 +1,5 @@
 import { expect, it, describe } from "vitest";
-import { TSDocBuilder } from "../../core/formatters/tsdoc-builder";
+import { TSDocBuilder } from "./tsdoc-builder";
 
 describe("TSDocBuilder", () => {
   it("should generate a basic comment block", () => {
