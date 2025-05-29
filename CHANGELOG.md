@@ -8,11 +8,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ### Added
 
-- N/A
+- Multiline detection for function, classes, arrow function etc
 
 ### Changed
 
-- N/A
+- Add support for **CTRL+ALT+D** to work also on empty line
 
 ### Fixed
 
