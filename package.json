@@ -2,7 +2,7 @@
   "name": "tsdoc-gen",
   "displayName": "tsdoc-gen",
   "description": "Generate TSDoc comments for TypeScript code",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "publisher": "vicius",
   "icon": "./media/tsdoc-logo.webp",
   "engines": {
@@ -85,12 +85,14 @@
     "test:ci": "npm run test:unit && npm run test:e2e",
     "dev": "tsc -w",
     "build": "tsc",
-    "vscode:test": "vscode-test"
+    "vscode:test": "vscode-test",
+    "build:promote": "tsc",
+    "promote": "npm run build:promote && node dist/scripts/promote.js"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.5",
     "@types/mocha": "^10.0.10",
-    "@types/node": "20.x",
+    "@types/node": "^20.17.55",
     "@types/vscode": "^1.100.0",
     "@typescript-eslint/eslint-plugin": "^8.31.1",
     "@typescript-eslint/parser": "^8.31.1",
