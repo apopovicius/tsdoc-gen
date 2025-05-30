@@ -87,6 +87,7 @@
     "build": "tsc",
     "vscode:test": "vscode-test",
     "build:promote": "tsc",
+    "postinstall": "npm run build && npm link",
     "promote": "npm run build:promote && node dist/scripts/promote.js"
   },
   "devDependencies": {
