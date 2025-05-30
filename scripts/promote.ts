@@ -19,9 +19,12 @@ try {
   execSync(`git commit -m "chore: release ${version}"`, { stdio: "inherit" });
   execSync("git push origin main", { stdio: "inherit" });
 
-  console.log(
-    `🚀 Promotion triggered for version ${version} (CI will handle tagging and release)`
-  );
+  // ✅ Tag and push the tag
+  const tag = `v${version}`;
+  execSync(`git tag ${tag}`, { stdio: "inherit" });
+  execSync(`git push origin ${tag}`, { stdio: "inherit" });
+
+  console.log(`🚀 Promotion triggered for version ${version} via tag ${tag}`);
 } catch (error: any) {
   console.error("❌ Promotion failed:", error.message);
   process.exit(1);
