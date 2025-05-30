@@ -20,7 +20,7 @@ try {
   execSync("git push origin main", { stdio: "inherit" });
 
   // ✅ Tag and push the tag
-  const tag = `v${version}`;
+  const tag = `${version}`;
   execSync(`git tag ${tag}`, { stdio: "inherit" });
   execSync(`git push origin ${tag}`, { stdio: "inherit" });
 
