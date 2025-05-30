@@ -4,6 +4,10 @@ All notable changes to the "tsdoc-gen" extension will be documented in this file
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.2.3] - 2024-05-30
+
+Patch update containing a refresh of the readme section
+
 ## [0.2.2] - 2024-05-30
 
 ### ✨ Added
