@@ -2,7 +2,7 @@
   "name": "tsdoc-gen",
   "displayName": "tsdoc-gen",
   "description": "Generate TSDoc comments for TypeScript code",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "publisher": "vicius",
   "icon": "./media/tsdoc-logo.webp",
   "engines": {
@@ -16,31 +16,10 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
-    "configuration": {
-      "title": "TSDoc genenerator",
-      "properties": {
-        "tsdocGen.triggerKeyword": {
-          "type": "string",
-          "default": "/*!",
-          "when": "editorTextFocus && editorLangId == typescript",
-          "description": "Trigger keyword that inserts a TSDoc block when typed on a single line"
-        },
-        "tsdocGen.includeReturnsForVoid": {
-          "type": "boolean",
-          "default": false,
-          "description": "If false, @returns is omitted for void/undefined types"
-        },
-        "tsdocGen.includeEmptyParamBlock": {
-          "type": "boolean",
-          "default": false,
-          "description": "Include @param block even when there are no parameters"
-        }
-      }
-    },
     "commands": [
       {
         "command": "tsdoc-gen.generateTSDoc",
-        "title": "Generate TSDoc Comments"
+        "title": "Generate TSDoc block"
       }
     ],
     "keybindings": [
@@ -64,6 +43,26 @@
           "group": "navigation"
         }
       ]
+    },
+    "configuration": {
+      "title": "TSDoc Generator",
+      "properties": {
+        "tsdocGen.triggerKeyword": {
+          "type": "string",
+          "default": "/*!",
+          "description": "Trigger keyword that auto-inserts a TSDoc block when typed on its own line."
+        },
+        "tsdocGen.includeReturnsForVoid": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include @returns even for functions returning void/undefined"
+        },
+        "tsdocGen.includeEmptyParamBlock": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include @param block even when function/class has no parameters"
+        }
+      }
     }
   },
   "scripts": {

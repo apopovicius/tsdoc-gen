@@ -1,16 +1,20 @@
 import * as vscode from "vscode";
-import { generateTSDocAtCursor } from "./handlers/command-handler";
-import { registerAboveLineDocTrigger } from "./handlers/above-line-trigger";
+import { registerCommandTrigger, registerKeywordTrigger } from "./triggers";
 
+/**
+ * Entry point for the TSDoc Generator extension.
+ * Registers:
+ * - Manual TSDoc generation command (Ctrl+Alt+D, context menu, etc.)
+ * - Auto-insertion listener for the configured trigger keyword (e.g. /*!).
+ */
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
-    vscode.commands.registerCommand(
-      "tsdoc-gen.generateTSDoc",
-      generateTSDocAtCursor
-    )
+    registerCommandTrigger(),
+    registerKeywordTrigger()
   );
-
-  context.subscriptions.push(registerAboveLineDocTrigger());
 }
 
+/**
+ * Deactivation hook (optional for cleanup, currently unused).
+ */
 export function deactivate() {}

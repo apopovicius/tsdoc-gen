@@ -1,4 +1,4 @@
-import { expect, it, describe } from "vitest";
+import { describe, it, expect } from "vitest";
 import { TSDocBuilder } from "./tsdoc-builder";
 
 describe("TSDocBuilder", () => {
@@ -15,26 +15,57 @@ describe("TSDocBuilder", () => {
     `);
   });
 
-  it("should support adding params and return", () => {
+  it("should support addParam and addReturns", () => {
     const result = new TSDocBuilder()
       .open()
-      .addLine("Example")
+      .addLine("Example function")
       .addParam("x", "number")
       .addReturns("string")
       .close()
       .toString();
 
-    expect(result).toContain("@param x {number}");
+    expect(result).toContain("@param x - {number}");
     expect(result).toContain("@returns string");
   });
 
-  it("should not add return if type is null", () => {
+  it("should support addParams with multiple entries", () => {
     const result = new TSDocBuilder()
       .open()
-      .addReturns(null)
+      .addParams([
+        ["a", "string"],
+        ["b", "number"],
+      ])
       .close()
       .toString();
 
+    expect(result).toContain("@param a - {string}");
+    expect(result).toContain("@param b - {number}");
+  });
+
+  it("should omit @returns if type is undefined", () => {
+    const result = new TSDocBuilder()
+      .open()
+      .addReturns(undefined)
+      .close()
+      .toString();
+    expect(result).not.toContain("@returns");
+  });
+
+  it("should omit @returns if type is void", () => {
+    const result = new TSDocBuilder()
+      .open()
+      .addReturns("void")
+      .close()
+      .toString();
+    expect(result).not.toContain("@returns");
+  });
+
+  it("should omit @returns if type is undefined", () => {
+    const result = new TSDocBuilder()
+      .open()
+      .addReturns("undefined")
+      .close()
+      .toString();
     expect(result).not.toContain("@returns");
   });
 });

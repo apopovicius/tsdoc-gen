@@ -1,12 +1,9 @@
 import { Project, SyntaxKind } from "ts-morph";
-
 import { beforeAll, describe, expect, it } from "vitest";
-import {
-  collectMultilineDeclarations,
-  DeclarationMeta,
-} from "./multiline-handler";
+import { collectMultilineDeclarations } from "./multiline";
+import type { DeclarationMeta } from "./types";
 
-describe("multilineHandler - collectMultilineDeclarations", () => {
+describe("collectMultilineDeclarations", () => {
   const project = new Project({
     useInMemoryFileSystem: true,
     skipAddingFilesFromTsConfig: true,
@@ -34,17 +31,16 @@ describe("multilineHandler - collectMultilineDeclarations", () => {
     }
   `;
 
-  const sourceFile = project.createSourceFile("test.ts", sourceText, {
-    overwrite: true,
-  });
-
   let declarations: DeclarationMeta[];
 
   beforeAll(() => {
+    const sourceFile = project.createSourceFile("test.ts", sourceText, {
+      overwrite: true,
+    });
     declarations = collectMultilineDeclarations(sourceFile);
   });
 
-  it("should detect a multiline function declaration", () => {
+  it("should detect a function declaration", () => {
     const fn = declarations.find((d) => d.kind === "function");
     expect(fn).toBeDefined();
     expect(fn?.node.getText()).toContain("multiLineFunc");
@@ -57,7 +53,7 @@ describe("multilineHandler - collectMultilineDeclarations", () => {
     expect(cls).toBeDefined();
   });
 
-  it("should detect a method inside a class", () => {
+  it("should detect a class method", () => {
     const method = declarations.find(
       (d) => d.kind === "method" && d.node.getText().includes("doWork")
     );
@@ -71,6 +67,7 @@ describe("multilineHandler - collectMultilineDeclarations", () => {
     const variableName = arrow?.node
       .getFirstAncestorByKind(SyntaxKind.VariableDeclaration)
       ?.getName();
+
     expect(variableName).toBe("arrowFunc");
   });
 

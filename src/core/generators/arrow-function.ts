@@ -1,9 +1,11 @@
 import { Node, SyntaxKind, VariableDeclaration } from "ts-morph";
-import { TSDocHandler } from "./tsdoc-handler";
-import { tsdocTemplates } from "../templates";
+import { tsdocTemplates } from "../tsdoc-templates";
 import { extractParamMetadata } from "../formatters/param-metadata";
+import { shouldIncludeReturns } from "../formatters/returns";
+import { TSDocGenerator } from "./types";
+import { TSDocGeneratorOptions } from "../config";
 
-export class ArrowFunctionHandler implements TSDocHandler {
+export class ArrowFunctionHandler implements TSDocGenerator {
   canHandle(node: Node): boolean {
     if (node.getKind() !== SyntaxKind.VariableDeclaration) {
       return false;
@@ -13,7 +15,7 @@ export class ArrowFunctionHandler implements TSDocHandler {
     return initializer?.getKind() === SyntaxKind.ArrowFunction;
   }
 
-  generate(node: Node): string {
+  generate(node: Node, options?: TSDocGeneratorOptions): string {
     const decl = node.asKindOrThrow(SyntaxKind.VariableDeclaration);
     const arrowFn = decl
       .getInitializerOrThrow()
@@ -23,6 +25,18 @@ export class ArrowFunctionHandler implements TSDocHandler {
     const params = extractParamMetadata(arrowFn.getParameters());
     const returnType = arrowFn.getReturnType().getText();
 
-    return tsdocTemplates.arrowFunction(name, params, returnType);
+    const includeParams = options?.includeEmptyParamBlock || params.length > 0;
+    const includeReturns = shouldIncludeReturns(
+      returnType,
+      options?.includeReturnsForVoid ?? false
+    );
+
+    return tsdocTemplates.generateForArrowFunction({
+      name,
+      params,
+      returnType,
+      includeParams,
+      includeReturns,
+    });
   }
 }

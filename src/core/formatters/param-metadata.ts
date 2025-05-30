@@ -1,14 +1,15 @@
 import { ParameterDeclaration } from "ts-morph";
+import type { ParamMeta } from "../tsdoc-templates";
 
 /**
- * Extracts [[name, type]] tuples for @param doc generation.
+ * Extracts `[name, type]` pairs from function/method/arrow params.
  */
 export function extractParamMetadata(
   params: ParameterDeclaration[]
-): string[][] {
-  return params.map((p) => {
-    const name = p.getName();
-    const type = p.getType().getText();
-    return [name, type];
+): ParamMeta[] {
+  return params.map((param) => {
+    const name = param.getName();
+    const type = param.getType().getText(param);
+    return [name, type] as [string, string]; // 👈 force tuple
   });
 }
