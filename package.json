@@ -2,7 +2,7 @@
   "name": "tsdoc-gen",
   "displayName": "tsdoc-gen",
   "description": "Generate TSDoc comments for TypeScript code",
-  "version": "0.2.2",
+  "version": "0.2.0",
   "publisher": "vicius",
   "icon": "./media/tsdoc-logo.webp",
   "engines": {
