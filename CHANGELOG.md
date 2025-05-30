@@ -4,9 +4,51 @@ All notable changes to the "tsdoc-gen" extension will be documented in this file
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.2.2] - 2024-05-30
+
+### ✨ Added
+
+- **`ConstructorHandler`**:
+  - Generates TSDoc comments for class constructors.
+  - Supports `@param` tags based on constructor parameters.
+- **`generateForConstructor()`** in `tsdocTemplates`:
+  - Outputs `@param` tags and a default constructor description.
+- Support for recognizing:
+  - `ConstructorDeclaration`
+  - Arrow functions assigned via top-level `const`/`let`
+
+### 🛠️ Fixed
+
+- Fixed: `Ctrl+Alt+D` command did not generate comments when the cursor was on the same line as the declaration.
+- Fixed: `/*!` above a declaration broke TypeScript parsing, causing missed matches.
+- Fixed: `extractParamMetadata()` now uses `.getText(param)` to reliably resolve parameter types.
+- Fixed: Inserting comments no longer leaves extra blank lines or `/*!` behind.
+
+### 🧹 Improved
+
+- Unified declaration resolution:
+- Uses `getSameLineDeclaration()` or `getNextLineDeclaration()` based on context.
+- Replaced `/*!` trigger lines cleanly when detected.
+- Improved arrow function TSDoc output to include `@param` and `@returns`.
+
+### 🧪 Testing
+
+- Added unit tests for:
+  - `ConstructorHandler` (with/without params).
+  - Arrow functions with typed and untyped parameters.
+- Added debug logging for handler resolution (optional in dev).
+
+---
+
+## [0.2.1] - 2025-05-30
+
+Temporary version for testing
+
+---
+
 ## [0.2.0] - 2025-05-30
 
-### Added
+### ✨ Added
 
 - Multiline detection for function, classes, arrow function etc
 - Support for `VariableDeclaration` nodes (`const`, `let`, `var`) via new `VariableHandler`
@@ -18,7 +60,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Inline test coverage for all templates and handlers
 - `generateForVariable()` in `tsdocTemplates`
 
-### Changed
+### 🧹 Improved
 
 - All handlers now accept `options` from `TSDocGeneratorOptions`
 - Templates now properly pass `includeParams` and `includeReturns` flags to `TSDocBuilder`
@@ -26,7 +68,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - `addParams()` now renders an empty `@param` block when requested
 - Add support for **CTRL+ALT+D** to work also on empty line
 
-### Fixed
+### 🛠️ Fixed
 
 - Fix the bug when **/\*!** was not executing if no other generation was not executed before(eg. **CTRL+ALT+D**)
 - `@param` block is now rendered when `includeEmptyParamBlock` is enabled — even if no parameters exist
@@ -37,42 +79,42 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [0.1.2] - 2025-05-29
 
-### Added
+### ✨ Added
 
 - N/A
 
-### Changed
+### 🧹 Improved
 
 - Reduce sized of the extension
 
-### Fixed
+### 🛠️ Fixed
 
 - CI pipeline now runs unit and end2end test
 
 ## [0.1.1] - 2025-05-29
 
-### Added
+### ✨ Added
 
 - N/A
 
-### Changed
+### 🧹 Improved
 
 - Temporary disabled the config option for parameters functionality
 
-### Fixed
+### 🛠️ Fixed
 
 - N/A
 
 ## [0.1.0] - Initial version
 
-### Added
+### ✨ Added
 
 - Initial version
 
-### Changed
+### 🧹 Improved
 
 - N/A
 
-### Fixed
+### 🛠️ Fixed
 
 - N/A

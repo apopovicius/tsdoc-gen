@@ -1,6 +1,10 @@
 import * as vscode from "vscode";
-import { resolveDeclarationFromPosition } from "./declaration-resolver";
-import { createTSDocCommentFor, type DeclarationMeta } from "../core";
+import {
+  getNextLineDeclaration,
+  getSameLineDeclaration,
+} from "./declaration-resolver";
+import { createTSDocCommentFor } from "../core";
+import { ts } from "ts-morph";
 
 /**
  * @public
@@ -25,26 +29,48 @@ export function registerCommandTrigger(): vscode.Disposable {
 
       const document = editor.document;
       const position = editor.selection.active;
+      const triggerLine = position.line;
 
-      const match: DeclarationMeta | undefined = resolveDeclarationFromPosition(
-        document,
-        position,
-        "smart"
-      );
+      function isBlankOrTriggerLine(
+        document: vscode.TextDocument,
+        line: number
+      ): boolean {
+        const text = document.lineAt(line).text.trim();
+        const trigger = vscode.workspace
+          .getConfiguration("tsdocGen")
+          .get<string>("triggerKeyword", "/*!");
+        return text === "" || text === trigger;
+      }
+
+      let match;
+      let sameLine = false;
+
+      if (isBlankOrTriggerLine(document, triggerLine)) {
+        match = getNextLineDeclaration(document, position);
+      } else {
+        match = getSameLineDeclaration(document, position);
+        sameLine = true;
+      }
 
       if (!match) {
         vscode.window.showWarningMessage(
-          "No matching declaration found below or on the same line."
+          "No matching declaration found on or below the cursor."
         );
         return;
       }
 
-      const tsdoc = createTSDocCommentFor(match);
-      const insertPos = new vscode.Position(match.node.getStartLineNumber(), 0);
+      const { declaration, insertLine } = match;
+      let tsdoc = createTSDocCommentFor(declaration);
+      if (sameLine) {
+        tsdoc = tsdoc + "\n";
+      }
+      const insertPos = new vscode.Position(insertLine, 0);
 
       await editor.edit((editBuilder) => {
-        editBuilder.insert(insertPos, tsdoc + "\n");
+        editBuilder.insert(insertPos, tsdoc);
       });
+
+      vscode.window.showInformationMessage("TSDoc comment inserted.");
     }
   );
 }

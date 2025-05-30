@@ -7,8 +7,9 @@ import {
   ClassHandler,
   MethodHandler,
   PropertyHandler,
-  FallbackHandler,
   VariableHandler,
+  ConstructorHandler,
+  FallbackHandler,
 } from "./generators";
 
 import type { TSDocGeneratorOptions } from "./config";
@@ -73,6 +74,7 @@ TSDocEngine.register(
   new MethodHandler(),
   new PropertyHandler(),
   new VariableHandler(),
+  new ConstructorHandler(),
   new FallbackHandler() // Always last
 );
 

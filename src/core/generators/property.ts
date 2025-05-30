@@ -12,7 +12,8 @@ export class PropertyHandler implements TSDocGenerator {
     const prop = node.asKindOrThrow(SyntaxKind.PropertyDeclaration);
     const name = prop.getName();
     const type = prop.getType().getText(prop);
+    const defaultValue = prop.getInitializer()?.getText() || "";
 
-    return tsdocTemplates.generateForProperty({ name, type });
+    return tsdocTemplates.generateForProperty({ name, type, defaultValue });
   }
 }

@@ -6,4 +6,5 @@ export * from "./method";
 export * from "./property";
 export * from "./multiline";
 export * from "./variable";
+export * from "./constructor";
 export * from "./types";

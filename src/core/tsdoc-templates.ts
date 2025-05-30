@@ -55,12 +55,17 @@ export const tsdocTemplates = {
       .toString();
   },
 
-  generateForProperty(opts: { name: string; type: string }): string {
+  generateForProperty(opts: {
+    name: string;
+    type: string;
+    defaultValue: string;
+  }): string {
     return new TSDocBuilder()
       .open()
       .addLine(`TODO: Describe the ${opts.name} property.`)
       .addEmptyLine()
       .addLine(`@type {${opts.type}}`)
+      .addConditionalLine(!!opts.defaultValue, `@default ${opts.defaultValue}`)
       .close()
       .toString();
   },
@@ -87,6 +92,18 @@ export const tsdocTemplates = {
       .addLine(`TODO: Describe the ${opts.name} variable.`)
       .addEmptyLine()
       .addLine(`@type {${opts.type}}`)
+      .close()
+      .toString();
+  },
+
+  generateForConstructor(opts: {
+    params: ParamMeta[];
+    includeParams: boolean;
+  }): string {
+    return new TSDocBuilder()
+      .open()
+      .addLine("Creates an instance of the class.")
+      .addParams(opts.params, opts.includeParams)
       .close()
       .toString();
   },

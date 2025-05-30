@@ -1,4 +1,4 @@
 export interface TSDocGeneratorOptions {
-  includeReturnsForVoid: boolean;
-  includeEmptyParamBlock: boolean;
+  includeReturnsForVoid?: boolean;
+  includeEmptyParamBlock?: boolean;
 }

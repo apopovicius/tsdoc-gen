@@ -10,6 +10,6 @@ export function extractParamMetadata(
   return params.map((param) => {
     const name = param.getName();
     const type = param.getType().getText(param);
-    return [name, type] as [string, string]; // 👈 force tuple
+    return [name, type] as [string, string];
   });
 }

@@ -7,21 +7,32 @@ import { TSDocGeneratorOptions } from "../config";
 
 export class ArrowFunctionHandler implements TSDocGenerator {
   canHandle(node: Node): boolean {
-    if (node.getKind() !== SyntaxKind.VariableDeclaration) {
-      return false;
+    if (Node.isArrowFunction(node)) {
+      return true;
     }
 
-    const initializer = (node as VariableDeclaration).getInitializer();
-    return initializer?.getKind() === SyntaxKind.ArrowFunction;
+    if (!Node.isVariableDeclaration(node)) {
+      return false;
+    }
+    return Node.isArrowFunction(node.getInitializer());
   }
 
   generate(node: Node, options?: TSDocGeneratorOptions): string {
-    const decl = node.asKindOrThrow(SyntaxKind.VariableDeclaration);
-    const arrowFn = decl
-      .getInitializerOrThrow()
-      .asKindOrThrow(SyntaxKind.ArrowFunction);
+    let arrowFn: import("ts-morph").ArrowFunction;
+    let name = "<anonymous>";
 
-    const name = decl.getName();
+    if (Node.isArrowFunction(node)) {
+      arrowFn = node;
+      // Optional: try to infer name from surrounding context if needed
+    } else {
+      const decl = node.asKindOrThrow(SyntaxKind.VariableDeclaration);
+      arrowFn = decl
+        .getInitializerOrThrow()
+        .asKindOrThrow(SyntaxKind.ArrowFunction);
+
+      name = decl.getName();
+    }
+
     const params = extractParamMetadata(arrowFn.getParameters());
     const returnType = arrowFn.getReturnType().getText();
 

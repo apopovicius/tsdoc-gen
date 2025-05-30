@@ -23,6 +23,16 @@ export class TSDocBuilder {
   }
 
   /**
+   * Adds a line with a leading asterisk, but only if the condition is true.
+   */
+  addConditionalLine(condition: boolean, line: string): this {
+    if (condition) {
+      this.addLine(line);
+    }
+    return this;
+  }
+
+  /**
    * Adds an empty line (` *`) for spacing.
    */
   addEmptyLine(): this {

@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
-import { resolveDeclarationFromPosition } from "./declaration-resolver";
-import { createTSDocCommentFor, type DeclarationMeta } from "../core";
+import { getNextLineDeclaration } from "./declaration-resolver";
+import { createTSDocCommentFor } from "../core";
 
 /**
  * @public
@@ -14,10 +14,6 @@ import { createTSDocCommentFor, type DeclarationMeta } from "../core";
  *   immediately on the next line.
  * - Automatically replace the trigger keyword line with a generated TSDoc block.
  *
- * @remarks
- * This is used for "above-line" TSDoc generation, typically triggered by typing
- * a keyword directly in the editor, not via a command or menu.
- *
  * @returns A disposable listener for cleanup on extension deactivation.
  */
 export function registerKeywordTrigger(): vscode.Disposable {
@@ -28,51 +24,67 @@ export function registerKeywordTrigger(): vscode.Disposable {
     }
 
     const change = event.contentChanges[0];
-    if (!change) {
+    if (!change || change.text !== "!") {
       return;
     }
 
-    const insertedText = change.text.trim();
+    const triggerLine = change.range.start.line;
+    const cursorLine = editor.selection.active.line;
 
-    // Get trigger keyword from user config or default to /*!
+    if (cursorLine !== triggerLine) {
+      return;
+    }
+
     const trigger = vscode.workspace
       .getConfiguration("tsdocGen")
       .get<string>("triggerKeyword", "/*!");
 
-    const triggerLine = change.range.start.line;
-    const isOnTriggerLine = editor.selection.active.line === triggerLine;
+    const currentLine = editor.document.lineAt(triggerLine).text.trim();
 
-    if (insertedText === trigger && isOnTriggerLine) {
-      tryInsertTSDocBelowTriggerLine(editor, triggerLine);
+    if (currentLine === trigger) {
+      tryInsertTSDocInline(editor, triggerLine);
     }
   });
 }
 
 /**
  * Attempts to resolve and insert a TSDoc comment block if a declaration
- * exists immediately below the trigger line.
+ * exists immediately on the trigger line.
  */
-async function tryInsertTSDocBelowTriggerLine(
+async function tryInsertTSDocInline(
   editor: vscode.TextEditor,
   triggerLine: number
 ) {
   const document = editor.document;
-  const position = new vscode.Position(triggerLine, 0);
+  const line = document.lineAt(triggerLine);
+  const lineText = line.text;
+  const trigger = vscode.workspace
+    .getConfiguration("tsdocGen")
+    .get<string>("triggerKeyword", "/*!");
 
-  const match: DeclarationMeta | undefined = resolveDeclarationFromPosition(
-    document,
-    position,
-    "below-only"
-  );
-
-  if (!match || match.node.getStartLineNumber() !== triggerLine + 1) {
+  const triggerIndex = lineText.indexOf(trigger);
+  if (triggerIndex === -1) {
     return;
   }
 
-  const tsdoc = createTSDocCommentFor(match);
-  const triggerLineRange = document.lineAt(triggerLine).range;
+  const triggerRange = new vscode.Range(
+    new vscode.Position(triggerLine, triggerIndex),
+    new vscode.Position(triggerLine, triggerIndex + trigger.length)
+  );
+
+  const position = new vscode.Position(triggerLine, 0);
+  const match = getNextLineDeclaration(document, position);
+
+  if (
+    !match ||
+    match.declaration.node.getStartLineNumber() !== triggerLine + 2 // +2 because we skip the trigger line
+  ) {
+    return;
+  }
+
+  const tsdoc = createTSDocCommentFor(match.declaration);
 
   await editor.edit((editBuilder) => {
-    editBuilder.replace(triggerLineRange, tsdoc);
+    editBuilder.replace(triggerRange, tsdoc);
   });
 }

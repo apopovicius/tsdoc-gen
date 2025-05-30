@@ -82,6 +82,7 @@ describe("tsdocTemplates", () => {
     const result = tsdocTemplates.generateForProperty({
       name: "count",
       type: "number",
+      defaultValue: "0",
     });
 
     expect(result).toContain("Describe the count property");

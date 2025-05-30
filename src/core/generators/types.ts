@@ -6,6 +6,7 @@ import {
   PropertyDeclaration,
   Node,
   VariableDeclaration,
+  ConstructorDeclaration,
 } from "ts-morph";
 import { TSDocGeneratorOptions } from "../config";
 
@@ -19,7 +20,8 @@ export type DeclarationKind =
   | "method"
   | "arrow-function"
   | "property"
-  | "variable";
+  | "variable"
+  | "constructor";
 
 /**
  * Metadata structure that pairs a TypeScript declaration node
@@ -33,7 +35,8 @@ export interface DeclarationMeta {
     | MethodDeclaration
     | ArrowFunction
     | PropertyDeclaration
-    | VariableDeclaration;
+    | VariableDeclaration
+    | ConstructorDeclaration;
   kind: DeclarationKind;
 }
 

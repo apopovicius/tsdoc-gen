@@ -44,6 +44,12 @@ export function collectMultilineDeclarations(
         node,
         kind: "arrow-function",
       })
+    ),
+    ...sourceFile.getDescendantsOfKind(SyntaxKind.Constructor).map(
+      (node): DeclarationMeta => ({
+        node,
+        kind: "constructor",
+      })
     )
   );
 
