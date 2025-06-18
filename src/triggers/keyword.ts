@@ -17,6 +17,8 @@ import { createTSDocCommentFor } from "../core";
  * @returns A disposable listener for cleanup on extension deactivation.
  */
 export function registerKeywordTrigger(): vscode.Disposable {
+  console.log("[tsdoc-gen] Registering keyword trigger...");
+
   return vscode.workspace.onDidChangeTextDocument((event) => {
     const editor = vscode.window.activeTextEditor;
     if (!editor || event.document !== editor.document) {

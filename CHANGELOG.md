@@ -4,11 +4,18 @@ All notable changes to the "tsdoc-gen" extension will be documented in this file
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [0.2.3] - 2024-05-30
+## [0.3.0] - 2025-06-19
+
+Fix regression that prevents extension for properly work. No TSDOC comment was generating.
+The issue was related to the fact that I externalize ts-morph and i could not import it afterwards.
+
+**Limitation** - bundle size encreased as ts-morph is not part of the extension.
+
+## [0.2.3] - 2025-05-30
 
 Patch update containing a refresh of the readme section
 
-## [0.2.2] - 2024-05-30
+## [0.2.2] - 2025-05-30
 
 ### ✨ Added
 

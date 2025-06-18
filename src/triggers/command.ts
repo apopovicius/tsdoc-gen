@@ -4,7 +4,6 @@ import {
   getSameLineDeclaration,
 } from "./declaration-resolver";
 import { createTSDocCommentFor } from "../core";
-import { ts } from "ts-morph";
 
 /**
  * @public
@@ -19,6 +18,7 @@ import { ts } from "ts-morph";
  * the cursor) and inserts a generated TSDoc comment block above it.
  */
 export function registerCommandTrigger(): vscode.Disposable {
+  console.log("[tsdoc-gen] Registering command trigger...");
   return vscode.commands.registerCommand(
     "tsdoc-gen.generateTSDoc",
     async () => {

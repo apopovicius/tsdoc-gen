@@ -8,6 +8,7 @@ import { registerCommandTrigger, registerKeywordTrigger } from "./triggers";
  * - Auto-insertion listener for the configured trigger keyword (e.g. /*!).
  */
 export function activate(context: vscode.ExtensionContext) {
+  console.log("[tsdoc-gen] Activating extension...");
   context.subscriptions.push(
     registerCommandTrigger(),
     registerKeywordTrigger()

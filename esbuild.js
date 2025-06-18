@@ -35,8 +35,9 @@ async function main() {
     sourcesContent: false,
     platform: "node",
     outfile: "dist/extension.js",
-    external: production ? ["vscode", "ts-morph"] : ["vscode"],
+    external: ["vscode"],
     logLevel: "silent",
+    treeShaking: false,
     plugins: [
       /* add to the end of plugins array */
       esbuildProblemMatcherPlugin,

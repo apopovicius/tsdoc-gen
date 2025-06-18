@@ -107,5 +107,6 @@
     "type": "git",
     "url": "https://github.com/apopovicius/tsdoc-gen.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "sideEffects": true
 }
