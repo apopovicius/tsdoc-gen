@@ -4,6 +4,10 @@ All notable changes to the "tsdoc-gen" extension will be documented in this file
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.3.1] - 2025-06-19
+
+Synchronize github with azure market versions
+
 ## [0.3.0] - 2025-06-19
 
 Fix regression that prevents extension for properly work. No TSDOC comment was generating.
